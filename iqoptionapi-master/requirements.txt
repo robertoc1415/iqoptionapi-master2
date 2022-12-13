@@ -1,0 +1,7 @@
+tzlocal
+pylint
+requests
+pandas
+numpy
+finta
+websocket-client==0.56
