@@ -675,7 +675,7 @@ class IQ_Option:
         self.api.listinfodata.delete(id_number)
         return listinfodata_dict["win"]
 
-    def check_win_v2(self, id_number, polling_time):
+    def check_win_v2(self, id_number):
         while True:
             check, data = self.get_betinfo(id_number)
             win = data["result"]["data"][str(id_number)]["win"]
@@ -686,7 +686,6 @@ class IQ_Option:
                         "deposit"]
                 except:
                     pass
-            time.sleep(polling_time)
 
     def check_win_v3(self, id_number):
         while True:
