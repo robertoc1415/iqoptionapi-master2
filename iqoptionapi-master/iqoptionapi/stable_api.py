@@ -687,17 +687,26 @@ class IQ_Option:
                 except:
                     pass
 
+#     def check_win_v3(self, id_number):
+#         while True:
+#             try:
+
+#                 if self.get_async_order(id_number)["option-closed"] != {}:
+#                     break
+#             except:
+#                 pass
+
+#         return self.get_async_order(id_number)["option-closed"]["msg"]["profit_amount"] - \
+#                self.get_async_order(id_number)["option-closed"]["msg"]["amount"]
+    
+    
     def check_win_v3(self, id_number):
         while True:
-            try:
-
-                if self.get_async_order(id_number)["option-closed"] != {}:
-                    break
-            except:
-                pass
-
-        return self.get_async_order(id_number)["option-closed"]["msg"]["profit_amount"] - \
-               self.get_async_order(id_number)["option-closed"]["msg"]["amount"]
+            result = self.get_optioninfo_v2(10)
+            if result['msg']['closed_options'][0]['id'][0] == id_number and result['msg']['closed_options'][0]['id'][0] != None:
+                return result['msg']['closed_options'][0]['win'],(result['msg']['closed_options'][0]['win_amount']-result['msg']['closed_options'][0]['amount'] if result['msg']['closed_options'][0]['win'] != 'equal' else 0)
+                break
+            time.sleep(1)
 
     # -------------------get infomation only for binary option------------------------
 
